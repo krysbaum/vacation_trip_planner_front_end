@@ -4,10 +4,13 @@ import { TripsIndex } from "./TripsIndex";
 import { TripsNew } from "./TripsNew";
 import { Modal } from "./Modal";
 import { TripsShow } from "./TripsShow";
+import { Routes, Route } from "react-router-dom";
+import { Signup } from "./Signup";
+import { Login } from "./Login";
+import { LogoutLink } from "./LogoutLink";
 
 export function Content() {
   const [trips, setTrips] = useState([]);
-  // const [places, setPlaces] = useState([]);
   const [isTripsShowVisible, setIsTripsShowVisible] = useState(false);
   const [currentTrip, setCurrentTrip] = useState({});
 
@@ -52,6 +55,15 @@ export function Content() {
   return (
     <main>
       <div>
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+        <Routes>
+          <Route path="/logout" element={<LogoutLink />} />
+        </Routes>
         <h1>Your Trip Starts Here</h1>
         <TripsNew onCreateTrip={handleCreateTrip} />
         <TripsIndex trips={trips} onShowTrip={handleShowTrip} />

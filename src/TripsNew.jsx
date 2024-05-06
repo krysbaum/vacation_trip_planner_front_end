@@ -1,6 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
+import { useState } from "react";
+
 export function TripsNew(props) {
+  const [isCreateTripsClicked, setisCreateTripsClicked] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
@@ -8,26 +12,39 @@ export function TripsNew(props) {
   };
 
   return (
-    <div>
-      <h1>New Trip</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="container">
+      {localStorage.getItem("jwt") ? (
         <div>
-          User_id: <input name="user_id" type="integer" />
+          {isCreateTripsClicked ? (
+            <div>
+              <div>
+                <h1>New Trip</h1>
+                <form onSubmit={handleSubmit}>
+                  <div>
+                    Title: <input name="title" type="text" />
+                  </div>
+                  <div>
+                    Image: <input name="image_url" type="text" />
+                  </div>
+                  <div>
+                    Start: <input name="start_time" type="datetime" />
+                  </div>
+                  <div>
+                    End: <input name="end_time" type="datetime" />
+                  </div>
+                  <button type="submit">Let's Plan!</button>
+                  <button onClick={() => setisCreateTripsClicked(false)}>Cancel</button>
+                </form>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <button onClick={() => setisCreateTripsClicked(true)}>New Trip</button>
+              <br></br>
+            </div>
+          )}
         </div>
-        <div>
-          Title: <input name="title" type="text" />
-        </div>
-        <div>
-          Image: <input name="image_url" type="text" />
-        </div>
-        <div>
-          Start: <input name="start_time" type="datetime" />
-        </div>
-        <div>
-          End: <input name="end_time" type="datetime" />
-        </div>
-        <button type="submit">Let's Plan!</button>
-      </form>
+      ) : null}
     </div>
   );
 }
