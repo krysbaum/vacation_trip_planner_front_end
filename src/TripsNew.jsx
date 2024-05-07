@@ -18,7 +18,8 @@ export function TripsNew(props) {
           {isCreateTripsClicked ? (
             <div>
               <div>
-                <h1>New Trip</h1>
+                <br></br>
+                <h2>New Trip</h2>
                 <form onSubmit={handleSubmit}>
                   <div>
                     Title: <input name="title" type="text" />
@@ -32,6 +33,7 @@ export function TripsNew(props) {
                   <div>
                     End: <input name="end_time" type="datetime" />
                   </div>
+                  <br></br>
                   <button type="submit">Let's Plan!</button>
                   <button onClick={() => setisCreateTripsClicked(false)}>Cancel</button>
                 </form>

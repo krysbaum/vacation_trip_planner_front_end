@@ -8,7 +8,7 @@ export function PlacesNew(props) {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>New Place</h1>
       <form onSubmit={handleSubmit}>
         <div>

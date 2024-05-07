@@ -4,20 +4,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export function TripsIndex(props) {
   return (
-    <div>
+    <div className="container">
       {localStorage.getItem("jwt") ? (
-        <div className="container">
-          <h1>All Trips</h1>
-
-          {props.trips.map((trip) => (
-            <div className="col-sm" key={trip.id}>
-              <br></br>
-              <h2>{trip.title}</h2>
-              <img height="250" src={trip.image_url} />
-              <br></br>
-              <button onClick={() => props.onShowTrip(trip)}>Places</button>
-            </div>
-          ))}
+        <div>
+          <br></br>
+          <h2>All Trips</h2>
+          <div className="row row-cols-auto">
+            {props.trips.map((trip) => (
+              <div className="col" key={trip.id}>
+                <br></br>
+                <h2>{trip.title}</h2>
+                <img id="image-covers" height="250" src={trip.image_url} />
+                <br></br>
+                <button onClick={() => props.onShowTrip(trip)}>Places</button>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className="container">
