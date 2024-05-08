@@ -6,6 +6,7 @@ import { useState } from "react";
 export function TripsShow(props) {
   const [isPlaceCreationShowVisible, setIsPlaceCreationShowVisible] = useState(false);
   const [updatePlaceId, setUpdatePlaceId] = useState(null);
+  // const [places, setPlaces] = useState({});
 
   const handleCreatePlace = (params) => {
     console.log("handleCreatePlace", params);
@@ -15,20 +16,27 @@ export function TripsShow(props) {
     });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    // props.onUpdatePhoto(props.photo.id, params, () => event.target.reset());
+    handleUpdatePlace(updatePlaceId, params, () => (window.location.href = "/"));
+  };
+
   const handleUpdatePlace = (id, params, successCallback) => {
     console.log("handleUpdatePlace", params);
     axios.patch(`http://localhost:3000/places/${id}.json`, params).then((response) => {
-      setPlace(
-        places.map((photo) => {
-          if (photo.id === response.data.id) {
-            return response.data;
-          } else {
-            return photo;
-          }
-        })
-      );
+      console.log(response);
+      // setPlaces(
+      //   places.map((place) => {
+      //     if (place.id === response.data.id) {
+      //       return response.data;
+      //     } else {
+      //       return place;
+      //     }
+      //   })
+      // );
       successCallback();
-      handleClose();
     });
   };
 
@@ -51,7 +59,7 @@ export function TripsShow(props) {
               {place.id === updatePlaceId ? (
                 <div>
                   <div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div>
                         Name: <input defaultValue={place.name} name="name" type="text"></input>
                       </div>
@@ -61,11 +69,13 @@ export function TripsShow(props) {
                       <div>
                         Description: <input defaultValue={place.description} name="description" type="text" />
                       </div>
-                      <button type="submit">Update!</button>
+                      <button onClick={() => handleUpdatePlace} type="submit">
+                        Update!
+                      </button>
                     </form>
                   </div>
                   <button onClick={() => setUpdatePlaceId(null)} className="btn btn-link text-muted">
-                    Clicked!
+                    Cancel
                   </button>
                 </div>
               ) : (
@@ -87,3 +97,5 @@ export function TripsShow(props) {
     </div>
   );
 }
+
+// TO DO: update data w/out closing modal --> repurpose commented out code lines 30-38 to content

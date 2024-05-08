@@ -14,10 +14,10 @@ html {
 }
 
 button {
-  background-color: whitesmoke;
-  border: none;
+  background-color: orange;
+  border: solid whitesmoke 2px;
   outline: 5px;
-  color: black;
+  color: whitesmoke;
   padding: 8px 15px;
   text-align: center;
   text-decoration: none;
@@ -25,12 +25,14 @@ button {
   font-size: 16px;
   border-radius: 10px;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 6px;
   
 }
 
 button:hover {
-  background-color: gray;
-  color: whitesmoke;
+  background-color: whitesmoke;
+  color: gray;
+  border: gray solid 2px
 }
 
 main {
@@ -47,7 +49,7 @@ input {
 }
 
 #image-covers {
-  border: darkgoldenrod 3px solid;
+  border: orange 3px solid;
   border-radius: 8px;
   object-fit: cover;
   width: 300px;
@@ -55,9 +57,21 @@ input {
 }
 
 #img-places {
-  border: darkgoldenrod 3px solid;
+  border: brown 3px solid;
   border-radius: 8px;
   object-fit: cover;
   width: 300px;
   height: 300px;
+}
+
+#root {background-image: url("https://garden.spoonflower.com/c/12801159/p/f/m/E3UsrcJM5LZGAMySGAErASxmLRMr8JTHZiBHDo5kBAeGLnnsGwRCxZmJlQ/Solid%20Color%20%7BPale%20Light%20Orange%7D%20.jpg")}
+
+#gemini {
+  padding: 10px; 
+  display: flex;
+  align-items: center;
+}
+
+#gemini-form {
+  margin: 4px;
 }

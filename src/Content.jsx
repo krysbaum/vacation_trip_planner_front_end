@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import { Signup } from "./Signup";
 import { Login } from "./Login";
 import { LogoutLink } from "./LogoutLink";
+import { GeminiInputForm } from "./GeminiInputForm";
 
 export function Content() {
   const [trips, setTrips] = useState([]);
@@ -70,6 +71,7 @@ export function Content() {
         <Modal show={isTripsShowVisible} onClose={handleClose}>
           <TripsShow trip={currentTrip} />
         </Modal>
+        <GeminiInputForm />
       </div>
     </main>
   );
