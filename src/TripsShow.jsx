@@ -6,12 +6,28 @@ import { useState } from "react";
 export function TripsShow(props) {
   const [isPlaceCreationShowVisible, setIsPlaceCreationShowVisible] = useState(false);
   const [updatePlaceId, setUpdatePlaceId] = useState(null);
+  const [isUpdateTripClicked, setUpdateTrip] = useState(false);
   // const [places, setPlaces] = useState({});
+
+  const handleTripSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    props.onUpdateTrip(props.trip.id, params);
+    event.target.reset();
+  };
 
   const handleCreatePlace = (params) => {
     console.log("handleCreatePlace", params);
     axios.post("http://localhost:3000/places.json", params).then((response) => {
       console.log("handleCreatePlaceComplete", response);
+      window.location.href = "/";
+    });
+  };
+
+  const handleDestroyPlace = (id) => {
+    console.log("handleDestroyPlace", id);
+    axios.delete(`http://localhost:3000/places/${id}.json`).then((response) => {
+      console.log(response);
       window.location.href = "/";
     });
   };
@@ -40,8 +56,46 @@ export function TripsShow(props) {
     });
   };
 
+  const handleClick = () => {
+    props.onDestroyTrip(props.trip.id);
+    window.location.href = "/";
+  };
+
   return (
     <div className="container">
+      {isUpdateTripClicked ? null : (
+        <div>
+          <button className="btn btn-link text-muted" onClick={() => setUpdateTrip(true)}>
+            Edit Trip
+          </button>
+          <button id="delete_trip" className="btn btn-link text-muted" onClick={handleClick}>
+            Delete Trip
+          </button>
+        </div>
+      )}
+      {isUpdateTripClicked ? (
+        <div>
+          <form onSubmit={handleTripSubmit}>
+            <div>
+              Name: <input defaultValue={props.trip.title} name="title" type="text" />
+            </div>
+            <div>
+              Image: <input defaultValue={props.trip.image_url} name="image_url" type="text" />
+            </div>
+            <div>
+              Start: <input defaultValue={props.trip.start_time} name="start_time" type="text" />
+            </div>
+            <div>
+              End: <input defaultValue={props.trip.end_time} name="end_time" type="text" />
+            </div>
+            <button type="submit">Update Trip</button>
+          </form>
+          <button className="btn btn-link text-muted" onClick={() => setUpdateTrip(false)}>
+            Cancel
+          </button>
+        </div>
+      ) : null}
+
       {isPlaceCreationShowVisible ? null : (
         <div className="row">
           <h1>
@@ -73,6 +127,9 @@ export function TripsShow(props) {
                         Update!
                       </button>
                     </form>
+                    <button onClick={() => handleDestroyPlace(place.id)} id="delete_button">
+                      Delete
+                    </button>
                   </div>
                   <button onClick={() => setUpdatePlaceId(null)} className="btn btn-link text-muted">
                     Cancel

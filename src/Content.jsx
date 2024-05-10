@@ -23,19 +23,32 @@ export function Content() {
     });
   };
 
-  // const handleIndexPlaces = () => {
-  //   console.log("handleIndexPlaces");
-  //   axios.get("http://localhost:3000/places.json").then((response) => {
-  //     console.log(response.data);
-  //     setPlaces(response.data);
-  //   });
-  // };
+  const handleUpdateTrip = (id, params) => {
+    axios.patch(`http://localhost:3000/trips/${id}.json`, params).then((response) => {
+      console.log(response.data);
+      setTrips(
+        trips.map((trip) => {
+          if (trip.id === response.data.id) {
+            return response.data;
+          } else {
+            return trip;
+          }
+        })
+      );
+    });
+  };
 
   const handleCreateTrip = (params, successCallback) => {
     console.log("handleCreateTrip", params);
     axios.post("http://localhost:3000/trips.json", params).then((response) => {
       setTrips([...trips, response.data]);
       successCallback();
+    });
+  };
+  const handleDestroyTrip = (id) => {
+    console.log("handleDestroyTrip", id);
+    axios.delete(`http://localhost:3000/trips/${id}.json`).then((response) => {
+      console.log(response);
     });
   };
 
@@ -65,13 +78,13 @@ export function Content() {
         <Routes>
           <Route path="/logout" element={<LogoutLink />} />
         </Routes>
-        <h1>Your Trip Starts Here</h1>
+        <h1 className="container">Your Trip Starts Here</h1>
         <TripsNew onCreateTrip={handleCreateTrip} />
         <TripsIndex trips={trips} onShowTrip={handleShowTrip} />
         <Modal show={isTripsShowVisible} onClose={handleClose}>
-          <TripsShow trip={currentTrip} />
+          <TripsShow trip={currentTrip} onUpdateTrip={handleUpdateTrip} onDestroyTrip={handleDestroyTrip} />
         </Modal>
-        <GeminiInputForm />
+        <GeminiInputForm className="container" />
       </div>
     </main>
   );

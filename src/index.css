@@ -73,5 +73,21 @@ input {
 }
 
 #gemini-form {
-  margin: 4px;
+  margin: 8px;
+}
+
+#delete_button {
+  background-color: darkred;
+}
+
+#delete_button:hover{
+  background-color: red;
+  color:whitesmoke
+}
+
+#delete_trip {
+  color:darkred !important
+}
+#delete_trip:hover {
+  color:red !important
 }
