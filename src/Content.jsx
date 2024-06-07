@@ -17,14 +17,14 @@ export function Content() {
 
   const handleIndexTrips = () => {
     console.log("handleIndexTrips");
-    axios.get("http://localhost:3000/trips.json").then((response) => {
+    axios.get("/trips.json").then((response) => {
       console.log(response.data);
       setTrips(response.data);
     });
   };
 
   const handleUpdateTrip = (id, params) => {
-    axios.patch(`http://localhost:3000/trips/${id}.json`, params).then((response) => {
+    axios.patch(`/trips/${id}.json`, params).then((response) => {
       console.log(response.data);
       setTrips(
         trips.map((trip) => {
@@ -40,14 +40,14 @@ export function Content() {
 
   const handleCreateTrip = (params, successCallback) => {
     console.log("handleCreateTrip", params);
-    axios.post("http://localhost:3000/trips.json", params).then((response) => {
+    axios.post("/trips.json", params).then((response) => {
       setTrips([...trips, response.data]);
       successCallback();
     });
   };
   const handleDestroyTrip = (id) => {
     console.log("handleDestroyTrip", id);
-    axios.delete(`http://localhost:3000/trips/${id}.json`).then((response) => {
+    axios.delete(`/trips/${id}.json`).then((response) => {
       console.log(response);
     });
   };
@@ -78,13 +78,13 @@ export function Content() {
         <Routes>
           <Route path="/logout" element={<LogoutLink />} />
         </Routes>
-        <h1 className="container">Your Trip Starts Here</h1>
         <TripsNew onCreateTrip={handleCreateTrip} />
         <TripsIndex trips={trips} onShowTrip={handleShowTrip} />
         <Modal show={isTripsShowVisible} onClose={handleClose}>
           <TripsShow trip={currentTrip} onUpdateTrip={handleUpdateTrip} onDestroyTrip={handleDestroyTrip} />
         </Modal>
         <GeminiInputForm className="container" />
+        <div id="buffer" className="container"></div>
       </div>
     </main>
   );

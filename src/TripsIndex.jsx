@@ -7,8 +7,6 @@ export function TripsIndex(props) {
     <div className="container">
       {localStorage.getItem("jwt") ? (
         <div>
-          <br></br>
-          <h2>All Trips</h2>
           <div className="row row-cols-auto">
             {props.trips.map((trip) => (
               <div className="col" key={trip.id}>
@@ -24,8 +22,9 @@ export function TripsIndex(props) {
       ) : (
         <div className="container">
           <br></br>
+          <h2>Want to Plan Your Next Trip?</h2>
           <h3>
-            <i>Log in or Sign Up to View Trips</i>
+            <i>Log in or Sign Up to use AI to create your next adventure!</i>
           </h3>
         </div>
       )}

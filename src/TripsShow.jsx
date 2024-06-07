@@ -9,6 +9,13 @@ export function TripsShow(props) {
   const [isUpdateTripClicked, setUpdateTrip] = useState(false);
   // const [places, setPlaces] = useState({});
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    // props.onUpdatePhoto(props.photo.id, params, () => event.target.reset());
+    handleUpdatePlace(updatePlaceId, params, () => (window.location.href = "/"));
+  };
+
   const handleTripSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
@@ -18,7 +25,7 @@ export function TripsShow(props) {
 
   const handleCreatePlace = (params) => {
     console.log("handleCreatePlace", params);
-    axios.post("http://localhost:3000/places.json", params).then((response) => {
+    axios.post("/places.json", params).then((response) => {
       console.log("handleCreatePlaceComplete", response);
       window.location.href = "/";
     });
@@ -26,22 +33,15 @@ export function TripsShow(props) {
 
   const handleDestroyPlace = (id) => {
     console.log("handleDestroyPlace", id);
-    axios.delete(`http://localhost:3000/places/${id}.json`).then((response) => {
+    axios.delete(`/places/${id}.json`).then((response) => {
       console.log(response);
       window.location.href = "/";
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const params = new FormData(event.target);
-    // props.onUpdatePhoto(props.photo.id, params, () => event.target.reset());
-    handleUpdatePlace(updatePlaceId, params, () => (window.location.href = "/"));
-  };
-
   const handleUpdatePlace = (id, params, successCallback) => {
     console.log("handleUpdatePlace", params);
-    axios.patch(`http://localhost:3000/places/${id}.json`, params).then((response) => {
+    axios.patch(`/places/${id}.json`, params).then((response) => {
       console.log(response);
       // setPlaces(
       //   places.map((place) => {

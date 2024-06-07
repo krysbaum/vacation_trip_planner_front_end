@@ -91,3 +91,14 @@ input {
 #delete_trip:hover {
   color:red !important
 }
+
+#gemini {
+  background-color: whitesmoke;
+  border: orange 3px solid;
+  border-radius: 8px;
+}
+
+#buffer { 
+  overflow-y: auto;
+  padding:350px
+}
