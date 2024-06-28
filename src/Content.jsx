@@ -83,6 +83,18 @@ export function Content() {
         <Modal show={isTripsShowVisible} onClose={handleClose}>
           <TripsShow trip={currentTrip} onUpdateTrip={handleUpdateTrip} onDestroyTrip={handleDestroyTrip} />
         </Modal>
+        <div className="container" id="youtubeVid">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/eQTAzyOIlUU?si=csJSVHi8x0-rZ51J"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
         <GeminiInputForm className="container" />
         <div id="buffer" className="container"></div>
       </div>

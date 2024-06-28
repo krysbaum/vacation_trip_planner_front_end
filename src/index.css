@@ -102,3 +102,7 @@ input {
   overflow-y: auto;
   padding:350px
 }
+
+#youtubeVid {
+  padding-left: 25px;
+}
